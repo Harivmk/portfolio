@@ -69,6 +69,23 @@
             color: #667eea;
         }
 
+        /* Resume Button in Navigation */
+        .nav-resume-btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(102, 126, 234, 0.3);
+        }
+
+        .nav-resume-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
         /* Hero Section */
         .hero {
             height: 100vh;
@@ -135,9 +152,121 @@
             border: 2px solid rgba(255, 255, 255, 0.3);
         }
 
+        .btn-resume {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+        }
+
         .btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Resume Modal */
+        .resume-modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .resume-modal-content {
+            background-color: white;
+            margin: 2% auto;
+            padding: 2rem;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .resume-close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            position: absolute;
+            right: 20px;
+            top: 15px;
+        }
+
+        .resume-close:hover {
+            color: #667eea;
+        }
+
+        .resume-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #667eea;
+        }
+
+        .resume-section {
+            margin-bottom: 2rem;
+        }
+
+        .resume-section h3 {
+            color: #667eea;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 0.5rem;
+        }
+
+        .resume-item {
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: #f9f9f9;
+            border-radius: 8px;
+        }
+
+        .resume-download-btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .resume-download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        /* File Upload Area */
+        .resume-upload-area {
+            border: 2px dashed #667eea;
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            background: #f8f9ff;
+            margin: 1rem 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .resume-upload-area:hover {
+            background: #f0f2ff;
+            border-color: #5a67d8;
+        }
+
+        .resume-upload-area.dragover {
+            background: #e6f3ff;
+            border-color: #2b6cb0;
         }
 
         /* Sections */
@@ -538,6 +667,61 @@
             .education-details {
                 grid-template-columns: 1fr;
             }
+
+            .resume-modal-content {
+                width: 95%;
+                margin: 5% auto;
+                padding: 1rem;
+            }
+        }
+
+        /* Dark theme styles */
+        .dark-theme {
+            --bg-color: #2d2d2d;
+            --text-color: #f0f0f0;
+            --card-bg: #404040;
+            --title-color: #ffffff;
+        }
+        
+        .dark-theme body {
+            background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);
+            color: var(--text-color);
+        }
+        
+        .dark-theme .section {
+            background: var(--bg-color);
+            color: var(--text-color);
+        }
+        .dark-theme .section h2{
+            color: var(--title-color);
+        }
+        
+        .dark-theme .project-card,
+        .dark-theme .skill-category,
+        .dark-theme .contact-card,
+        .dark-theme .education-card,
+        .dark-theme .timeline-content,
+        .dark-theme .stat-card {
+            background: var(--card-bg);
+            color: var(--text-color);
+        }
+        
+        .dark-theme nav {
+            background: rgba(45, 45, 45, 0.95);
+        }
+        
+        .dark-theme .nav-links a {
+            color: var(--text-color);
+        }
+
+        .dark-theme .resume-modal-content {
+            background: var(--card-bg);
+            color: var(--text-color);
+        }
+
+        .dark-theme .resume-item {
+            background: #555;
+            color: var(--text-color);
         }
     </style>
 </head>
@@ -554,9 +738,104 @@
                 <li><a href="#experience">Experience</a></li>
                 <li><a href="#education">Education</a></li>
                 <li><a href="#contact">Contact</a></li>
+                <li><a href="#" class="nav-resume-btn" onclick="openResumeModal()">📄 Resume</a></li>
             </ul>
         </div>
     </nav>
+
+    <!-- Resume Modal -->
+    <div id="resumeModal" class="resume-modal">
+        <div class="resume-modal-content">
+            <span class="resume-close" onclick="closeResumeModal()">&times;</span>
+            
+            <div class="resume-header">
+                <h2>Hari Vignesh</h2>
+                <p>Electronics & Communication Engineering Student</p>
+                <p>📧 hari.v23@iiits.in | 📱 +91 9444169462 | 📍 Chennai, India</p>
+                <button class="resume-download-btn" onclick="downloadResume()">
+                    📥 Download PDF Resume
+                </button>
+            </div>
+
+            <!-- Resume Upload Section -->
+            <div class="resume-section">
+                <h3>📄 Upload Your Resume</h3>
+                <div class="resume-upload-area" id="resumeUploadArea" onclick="document.getElementById('resumeFileInput').click()">
+                    <p>📤 Click here to upload your resume PDF</p>
+                    <p style="font-size: 0.9rem; color: #666;">Or drag and drop your PDF file here</p>
+                    <input type="file" id="resumeFileInput" accept=".pdf" style="display: none;" onchange="handleResumeUpload(event)">
+                </div>
+                <div id="uploadStatus" style="margin-top: 1rem; text-align: center;"></div>
+            </div>
+
+            <!-- Resume Content -->
+            <div class="resume-section">
+                <h3>🎓 Education</h3>
+                <div class="resume-item">
+                    <strong>Bachelor of Technology - Electronics and Communication Engineering</strong><br>
+                    Indian Institute of Information Technology, Sri City<br>
+                    Aug 2023 - Present | CGPA: 8.32
+                </div>
+            </div>
+
+            <div class="resume-section">
+                <h3>💼 Experience</h3>
+                <div class="resume-item">
+                    <strong>Research Intern</strong><br>
+                    IIIT Sri City | May 2025 - Jul 2025<br>
+                    • Conducted research on MIMO RADAR fundamentals and antenna design<br>
+                    • Used microstrip feedline technology and FEKO simulation software<br>
+                    • Gained hands-on experience with industrial MIMO RADAR boards
+                </div>
+                <div class="resume-item">
+                    <strong>Electronics Wing Member</strong><br>
+                    Connexion | Aug 2024 - Present<br>
+                    • Leading innovative projects in smart infrastructure<br>
+                    • Developed LoRa-based street lighting and water management systems<br>
+                    • Collaborated with cross-functional teams on IoT solutions
+                </div>
+            </div>
+
+            <div class="resume-section">
+                <h3>🛠️ Technical Skills</h3>
+                <div class="resume-item">
+                    <strong>Programming:</strong> C, Embedded C, C++, Python, MATLAB<br>
+                    <strong>Python Libraries:</strong> NumPy, Pandas<br>
+                    <strong>Tools & Software:</strong> FEKO, Mathworks, LTSpice, Firebase, GitHub, Linux CLI, Google Cloud<br>
+                    <strong>Core Competencies:</strong> Problem Solving, Team Work, Leadership, Circuit Design, IoT Systems
+                </div>
+            </div>
+
+            <div class="resume-section">
+                <h3>🚀 Projects</h3>
+                <div class="resume-item">
+                    <strong>Smart Street Light System</strong> (Connexion Project)<br>
+                    • Designed intelligent street lighting with LoRa communication and AC dimmer control<br>
+                    • Technologies: LoRa, AC Dimmer, IoT, Arduino
+                </div>
+                <div class="resume-item">
+                    <strong>IoT Water Quality Monitor</strong> (Winner - ElectroForge)<br>
+                    • Award-winning real-time water quality monitoring system<br>
+                    • Technologies: IoT, Real-time Monitoring, Sensors, Data Visualization
+                </div>
+                <div class="resume-item">
+                    <strong>ERP Chatbot System</strong> (Runner-up - Bit N Build)<br>
+                    • AI/ML-powered chatbot for Enterprise Resource Planning systems<br>
+                    • Technologies: AI/ML, Chatbot, ERP, NLP
+                </div>
+            </div>
+
+            <div class="resume-section">
+                <h3>🏆 Achievements</h3>
+                <div class="resume-item">
+                    • Winner - ElectroForge Hackathon (IoT Water Quality Monitor)<br>
+                    • Runner-up - Bit N Build Hackathon (ERP Chatbot System)<br>
+                    • CGPA: 8.32 in Electronics and Communication Engineering<br>
+                    • 5+ successful IoT and embedded systems projects
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Hero Section -->
     <section id="home" class="hero">
@@ -566,6 +845,7 @@
             <div class="hero-buttons">
                 <a href="#projects" class="btn btn-primary">View My Work</a>
                 <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+                <button class="btn btn-resume" onclick="openResumeModal()">📄 View Resume</button>
             </div>
         </div>
     </section>
@@ -834,15 +1114,225 @@
     </footer>
 
     <script>
+        // Resume Modal Functions
+        function openResumeModal() {
+            document.getElementById('resumeModal').style.display = 'block';
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
+
+        function closeResumeModal() {
+            document.getElementById('resumeModal').style.display = 'none';
+            document.body.style.overflow = 'auto'; // Restore scrolling
+        }
+
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            const modal = document.getElementById('resumeModal');
+            if (event.target === modal) {
+                closeResumeModal();
+            }
+        }
+
+        // Resume Download Function
+        function downloadResume() {
+            // Create a sample resume content for download
+            const resumeContent = generateResumeHTML();
+            const blob = new Blob([resumeContent], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'Hari_Vignesh_Resume.html';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            // Show download message
+            const statusDiv = document.getElementById('uploadStatus');
+            statusDiv.innerHTML = '<p style="color: #667eea;">✅ Resume downloaded successfully! (HTML format)</p>';
+            setTimeout(() => {
+                statusDiv.innerHTML = '';
+            }, 3000);
+        }
+
+        function generateResumeHTML() {
+            return `
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hari Vignesh - Resume</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+        h1, h2 { color: #667eea; }
+        .header { text-align: center; border-bottom: 2px solid #667eea; padding-bottom: 10px; }
+        .section { margin: 20px 0; }
+        .item { margin: 10px 0; padding: 10px; background: #f9f9f9; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Hari Vignesh</h1>
+        <p>Electronics & Communication Engineering Student</p>
+        <p>📧 hari.v23@iiits.in | 📱 +91 9444169462 | 📍 Chennai, India</p>
+    </div>
+    
+    <div class="section">
+        <h2>🎓 Education</h2>
+        <div class="item">
+            <strong>Bachelor of Technology - Electronics and Communication Engineering</strong><br>
+            Indian Institute of Information Technology, Sri City<br>
+            Aug 2023 - Present | CGPA: 8.32
+        </div>
+    </div>
+    
+    <div class="section">
+        <h2>💼 Experience</h2>
+        <div class="item">
+            <strong>Research Intern</strong><br>
+            IIIT Sri City | May 2025 - Jul 2025<br>
+            • Conducted research on MIMO RADAR fundamentals and antenna design<br>
+            • Used microstrip feedline technology and FEKO simulation software<br>
+            • Gained hands-on experience with industrial MIMO RADAR boards
+        </div>
+        <div class="item">
+            <strong>Electronics Wing Member</strong><br>
+            Connexion | Aug 2024 - Present<br>
+            • Leading innovative projects in smart infrastructure<br>
+            • Developed LoRa-based street lighting and water management systems<br>
+            • Collaborated with cross-functional teams on IoT solutions
+        </div>
+    </div>
+    
+    <div class="section">
+        <h2>🛠️ Technical Skills</h2>
+        <div class="item">
+            <strong>Programming:</strong> C, Embedded C, C++, Python, MATLAB<br>
+            <strong>Python Libraries:</strong> NumPy, Pandas<br>
+            <strong>Tools & Software:</strong> FEKO, Mathworks, LTSpice, Firebase, GitHub, Linux CLI, Google Cloud<br>
+            <strong>Core Competencies:</strong> Problem Solving, Team Work, Leadership, Circuit Design, IoT Systems
+        </div>
+    </div>
+    
+    <div class="section">
+        <h2>🚀 Projects</h2>
+        <div class="item">
+            <strong>Smart Street Light System</strong> (Connexion Project)<br>
+            • Designed intelligent street lighting with LoRa communication and AC dimmer control<br>
+            • Technologies: LoRa, AC Dimmer, IoT, Arduino
+        </div>
+        <div class="item">
+            <strong>IoT Water Quality Monitor</strong> (Winner - ElectroForge)<br>
+            • Award-winning real-time water quality monitoring system<br>
+            • Technologies: IoT, Real-time Monitoring, Sensors, Data Visualization
+        </div>
+        <div class="item">
+            <strong>ERP Chatbot System</strong> (Runner-up - Bit N Build)<br>
+            • AI/ML-powered chatbot for Enterprise Resource Planning systems<br>
+            • Technologies: AI/ML, Chatbot, ERP, NLP
+        </div>
+    </div>
+    
+    <div class="section">
+        <h2>🏆 Achievements</h2>
+        <div class="item">
+            • Winner - ElectroForge Hackathon (IoT Water Quality Monitor)<br>
+            • Runner-up - Bit N Build Hackathon (ERP Chatbot System)<br>
+            • CGPA: 8.32 in Electronics and Communication Engineering<br>
+            • 5+ successful IoT and embedded systems projects
+        </div>
+    </div>
+</body>
+</html>
+            `;
+        }
+
+        // Resume Upload Functions
+        function handleResumeUpload(event) {
+            const file = event.target.files[0];
+            if (file && file.type === 'application/pdf') {
+                processUploadedResume(file);
+            } else {
+                showUploadStatus('❌ Please select a PDF file only.', 'error');
+            }
+        }
+
+        function processUploadedResume(file) {
+            const statusDiv = document.getElementById('uploadStatus');
+            statusDiv.innerHTML = '<p style="color: #667eea;">📤 Processing your resume...</p>';
+            
+            // Simulate processing time
+            setTimeout(() => {
+                showUploadStatus(`✅ Resume "${file.name}" uploaded successfully!`, 'success');
+                
+                // You can add additional processing here, such as:
+                // - Storing the file in a variable for later use
+                // - Extracting text from PDF (requires additional libraries)
+                // - Updating the resume modal content with uploaded data
+                
+                storeUploadedResume(file);
+            }, 2000);
+        }
+
+        function storeUploadedResume(file) {
+            // Store the uploaded file for the session
+            // In a real application, you would send this to a server
+            window.uploadedResume = {
+                name: file.name,
+                size: file.size,
+                lastModified: file.lastModified,
+                file: file
+            };
+            
+            console.log('Resume stored:', window.uploadedResume);
+        }
+
+        function showUploadStatus(message, type) {
+            const statusDiv = document.getElementById('uploadStatus');
+            const color = type === 'error' ? '#ff6b6b' : '#667eea';
+            statusDiv.innerHTML = `<p style="color: ${color};">${message}</p>`;
+            
+            setTimeout(() => {
+                statusDiv.innerHTML = '';
+            }, 5000);
+        }
+
+        // Drag and Drop functionality for resume upload
+        const uploadArea = document.getElementById('resumeUploadArea');
+        
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('dragover');
+        });
+        
+        uploadArea.addEventListener('dragleave', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+        });
+        
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            
+            const files = e.dataTransfer.files;
+            if (files.length > 0 && files[0].type === 'application/pdf') {
+                processUploadedResume(files[0]);
+            } else {
+                showUploadStatus('❌ Please drop a PDF file only.', 'error');
+            }
+        });
+
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
             });
         });
 
@@ -873,53 +1363,6 @@
                 }, 200);
             });
         });
-
-        // Dynamic typing effect for hero section
-        function typeWriter(element, text, speed = 100) {
-            let i = 0;
-            element.innerHTML = '';
-            
-            function type() {
-                if (i < text.length) {
-                    element.innerHTML += text.charAt(i);
-                    i++;
-                    setTimeout(type, speed);
-                }
-            }
-            type();
-        }
-
-        // Add floating particles background
-        function createParticle() {
-            const particle = document.createElement('div');
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.animationDelay = Math.random() * 6 + 's';
-            
-            const keyframes = `
-                @keyframes float {
-                    0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-                    10% { opacity: 1; }
-                    90% { opacity: 1; }
-                    100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
-                }
-            `;
-            
-            if (!document.querySelector('#particle-styles')) {
-                const style = document.createElement('style');
-                style.id = 'particle-styles';
-                style.textContent = keyframes;
-                document.head.appendChild(style);
-            }
-            
-            document.querySelector('.hero').appendChild(particle);
-            
-            setTimeout(() => {
-                particle.remove();
-            }, 6000);
-        }
-
-        // Create particles periodically
-        setInterval(createParticle, 300);
 
         // Add scroll progress indicator
         function updateScrollProgress() {
@@ -989,40 +1432,6 @@
         window.addEventListener('resize', createMobileMenu);
         createMobileMenu();
 
-        // Add loading animation
-        window.addEventListener('load', () => {
-            document.body.style.opacity = '0';
-            document.body.style.transition = 'opacity 0.5s ease';
-            setTimeout(() => {
-                document.body.style.opacity = '1';
-            }, 100);
-        });
-
-        // Contact form functionality (if needed)
-        function handleContactForm() {
-            // This would typically connect to a backend service
-            // For now, it's a placeholder for future implementation
-            console.log('Contact form functionality can be added here');
-        }
-
-        // Performance optimization - lazy load images if any are added
-        if ('IntersectionObserver' in window) {
-            const imageObserver = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const img = entry.target;
-                        img.src = img.dataset.src;
-                        img.classList.remove('lazy');
-                        imageObserver.unobserve(img);
-                    }
-                });
-            });
-
-            document.querySelectorAll('img[data-src]').forEach(img => {
-                imageObserver.observe(img);
-            });
-        }
-
         // Add theme toggle functionality
         function createThemeToggle() {
             const themeToggle = document.createElement('button');
@@ -1047,57 +1456,59 @@
             themeToggle.addEventListener('click', () => {
                 document.body.classList.toggle('dark-theme');
                 themeToggle.innerHTML = document.body.classList.contains('dark-theme') ? '☀️' : '🌙';
+                
+                // Save theme preference
+                localStorage.setItem('darkTheme', document.body.classList.contains('dark-theme'));
             });
+            
+            // Load saved theme preference
+            const savedTheme = localStorage.getItem('darkTheme');
+            if (savedTheme === 'true') {
+                document.body.classList.add('dark-theme');
+                themeToggle.innerHTML = '☀️';
+            }
             
             document.body.appendChild(themeToggle);
         }
 
         createThemeToggle();
 
-        // Add dark theme styles
-        const darkThemeStyles = `
-            .dark-theme {
-                --bg-color: #2d2d2d;
-                --text-color: #f0f0f0;
-                --card-bg: #404040;
-                --title-color: #ffffff;
+        // Add loading animation
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.5s ease';
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+
+        // Keyboard accessibility for modal
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeResumeModal();
             }
-            
-            .dark-theme body {
-                background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);
-                color: var(--text-color);
-            }
-            
-            .dark-theme .section {
-                background: var(--bg-color);
-                color: var(--text-color);
-            }
-            .dark-theme .section h2{
-                color: var(--title-color);
-            }
-            
-            .dark-theme .project-card,
-            .dark-theme .skill-category,
-            .dark-theme .contact-card,
-            .dark-theme .education-card,
-            .dark-theme .timeline-content,
-            .dark-theme .project-description {
-                background: var(--card-bg);
-                color: var(--text-color);
-            }
-            
-            .dark-theme nav {
-                background: rgba(45, 45, 45, 0.95);
-            }
-            
-            .dark-theme .nav-links a {
-                color: var(--text-color);
-            }
-        `;
-        
-        const styleSheet = document.createElement('style');
-        styleSheet.textContent = darkThemeStyles;
-        document.head.appendChild(styleSheet);
+        });
+
+        // Performance optimization - lazy load images if any are added
+        if ('IntersectionObserver' in window) {
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src;
+                        img.classList.remove('lazy');
+                        imageObserver.unobserve(img);
+                    }
+                });
+            });
+
+            document.querySelectorAll('img[data-src]').forEach(img => {
+                imageObserver.observe(img);
+            });
+        }
+
+        console.log('Hari Vignesh Portfolio loaded successfully! 🚀');
     </script>
 </body>
 </html>
+                
